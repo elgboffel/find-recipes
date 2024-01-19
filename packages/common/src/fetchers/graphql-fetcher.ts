@@ -1,7 +1,7 @@
-import { GraphQLFetcher, GraphQLResponse } from "./types";
 import { stripIgnoredCharacters } from "graphql/utilities";
-import { fetcher } from "./fetcher";
 import { Error } from "../errors/app-error/error";
+import { fetcher } from "./fetcher";
+import { GraphQLFetcher, GraphQLResponse } from "./types";
 
 export async function graphqlFetcher<TResponse>({
   url,
@@ -11,6 +11,7 @@ export async function graphqlFetcher<TResponse>({
 }: GraphQLFetcher): Promise<GraphQLResponse<TResponse> | Error> {
   return await fetcher<GraphQLResponse<TResponse>>({
     url,
+
     config: {
       method: "POST",
       body: JSON.stringify({

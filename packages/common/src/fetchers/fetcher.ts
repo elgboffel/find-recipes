@@ -1,6 +1,6 @@
+import isomorphicFetch from "isomorphic-fetch";
 import { Error } from "../errors/app-error/error";
 import { FetcherArgs } from "./types";
-import isomorphicFetch from "isomorphic-fetch";
 
 export async function fetcher<TResponse>({
   url,
