@@ -1,23 +1,16 @@
 import { MapHtmlToRecipeStrategy } from "../map-html-to-recipe-strategy";
 
-export const mapSpisBedreHtmlToRecipe: MapHtmlToRecipeStrategy = (
-  html,
-  data,
-) => {
+export const mapSpisBedreHtmlToRecipe: MapHtmlToRecipeStrategy = (html, data) => {
   const urlObj = new URL(data.url);
 
   return {
     recipe: {
       title: html.querySelector('h2[itemprop="name"]')?.innerHTML ?? null,
-      description:
-        html.querySelector('p[itemprop="description"]')?.innerHTML ?? null,
+      description: html.querySelector('p[itemprop="description"]')?.innerHTML ?? null,
       image:
-        html
-          .querySelector('div[itemprop="image"] > img')
-          ?.getAttribute("src") ?? null,
+        html.querySelector('div[itemprop="image"] > img')?.getAttribute("src") ?? null,
       instructions:
-        html.querySelectorAll('div[itemprop="recipeInstructions"]')?.join("") ??
-        null,
+        html.querySelectorAll('div[itemprop="recipeInstructions"]')?.join("") ?? null,
       url: urlObj.href,
       originDomain: urlObj.origin,
     },

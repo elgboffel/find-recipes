@@ -1,10 +1,8 @@
-import { IDatabase } from "../../db-client";
 import { eq } from "drizzle-orm";
+import { IDatabase } from "../../db-client";
 import { recipe, RecipeWithRelations } from "../../schema";
 
-export const getAllRecipes = async (
-  db: IDatabase,
-): Promise<RecipeWithRelations[]> => {
+export const getAllRecipes = async (db: IDatabase): Promise<RecipeWithRelations[]> => {
   return await db.query.recipe.findMany({
     with: {
       recipesToCategories: { with: { category: true } },

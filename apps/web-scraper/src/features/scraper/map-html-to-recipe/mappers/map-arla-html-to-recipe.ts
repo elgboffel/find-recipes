@@ -6,8 +6,7 @@ export const mapArlaHtmlToRecipe: MapHtmlToRecipeStrategy = (html, data) => {
   return {
     recipe: {
       title: html.querySelector("h1")?.innerHTML ?? null,
-      description:
-        html.querySelector(".c-recipe__description")?.innerHTML ?? null,
+      description: html.querySelector(".c-recipe__description")?.innerHTML ?? null,
       instructions: html.querySelector(".how-to--steps")?.innerHTML ?? null,
       url: urlObj.href,
       originDomain: urlObj.origin,

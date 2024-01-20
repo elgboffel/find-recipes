@@ -4,7 +4,7 @@ import path from "path";
 export const createFile = (
   fileName: string,
   directory: string,
-  data: string | NodeJS.ArrayBufferView,
+  data: string | NodeJS.ArrayBufferView
 ) => {
   const dir = path.join(process.cwd(), directory);
 

@@ -1,14 +1,12 @@
+import { Domains } from "../../../crawlerSettings";
 import {
   mapArlaHtmlToRecipe,
   MapHtmlToRecipeStrategy,
   mapSpisBedreHtmlToRecipe,
   mapValdemarsroHtmltoRecipe,
 } from "./map-html-to-recipe-strategy";
-import { Domains } from "../../../crawlerSettings";
 
-export function mapHtmlToRecipeFactory(
-  domain: string,
-): MapHtmlToRecipeStrategy | null {
+export function mapHtmlToRecipeFactory(domain: string): MapHtmlToRecipeStrategy | null {
   if (Domains.Valdemarsro === domain) {
     return mapValdemarsroHtmltoRecipe;
   }

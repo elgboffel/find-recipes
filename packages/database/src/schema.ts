@@ -1,3 +1,4 @@
+import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm";
 import {
   integer,
   pgTable,
@@ -7,7 +8,6 @@ import {
   primaryKey,
   timestamp,
 } from "drizzle-orm/pg-core";
-import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm";
 
 export enum DbTables {
   Recipe = "recipe",
@@ -111,22 +111,19 @@ export const recipesToCategories = pgTable(
       name: "recipesToCategories",
       columns: [t.recipeId, t.categoryId],
     }),
-  }),
+  })
 );
 
-export const recipesToCategoriesRelations = relations(
-  recipesToCategories,
-  ({ one }) => ({
-    recipe: one(recipe, {
-      fields: [recipesToCategories.recipeId],
-      references: [recipe.id],
-    }),
-    category: one(category, {
-      fields: [recipesToCategories.categoryId],
-      references: [category.id],
-    }),
+export const recipesToCategoriesRelations = relations(recipesToCategories, ({ one }) => ({
+  recipe: one(recipe, {
+    fields: [recipesToCategories.recipeId],
+    references: [recipe.id],
   }),
-);
+  category: one(category, {
+    fields: [recipesToCategories.categoryId],
+    references: [category.id],
+  }),
+}));
 
 /* User */
 export type User = InferSelectModel<typeof user>;

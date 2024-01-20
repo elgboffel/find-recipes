@@ -1,5 +1,5 @@
-import "dotenv/config";
 import { addRecipe, IDatabase } from "database";
+import "dotenv/config";
 import { data as valdemarsroData } from "../../../__generated/valdemarsro-data";
 
 export async function seedDatabase(db: IDatabase) {

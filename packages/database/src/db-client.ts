@@ -1,7 +1,8 @@
-import * as schema from "./schema";
 import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import postgres, { Sql } from "postgres";
 import { QueryLogger } from "./logger";
+import * as schema from "./schema";
+
 let instance: Database | null = null;
 
 export type DatabaseOptions = {
@@ -15,8 +16,7 @@ export class Database {
   private readonly queryConnection: Sql;
 
   private constructor(options?: DatabaseOptions) {
-    const connectionString =
-      options?.connectionString ?? process.env.DATABASE_URL;
+    const connectionString = options?.connectionString ?? process.env.DATABASE_URL;
     if (!connectionString) {
       throw new Error("Database connection string is not provided.");
     }

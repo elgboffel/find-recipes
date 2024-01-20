@@ -1,5 +1,5 @@
-import path from "path";
 import fs from "fs";
+import path from "path";
 
 export const getFile = (relativePath: string) => {
   const dir = path.join(process.cwd(), relativePath);

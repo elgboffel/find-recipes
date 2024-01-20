@@ -1,3 +1,4 @@
+import { IDatabase } from "../../db-client";
 import {
   Category,
   category as categoriesSchema,
@@ -10,7 +11,6 @@ import {
   stat,
   ingredient,
 } from "../../schema";
-import { IDatabase } from "../../db-client";
 
 export type AddRecipe = {
   recipe: InsertRecipe;
@@ -87,10 +87,7 @@ export const addRecipe = async ({
         recipeId: recipeId.id,
       }));
 
-      await db
-        .insert(ingredient)
-        .values(mappedIngredients)
-        .onConflictDoNothing();
+      await db.insert(ingredient).values(mappedIngredients).onConflictDoNothing();
     }
   });
 };
