@@ -9,6 +9,9 @@ export async function scraper(data: CrawlData[], crawlerSettings: CrawlerSetting
   let scraped = 1;
 
   for (const element of data) {
+    /* TODO: remove */
+    if (scraped > 10) break;
+
     const res = await fetcher<string>({ url: element.url, isText: true });
 
     if (!res || res instanceof Error) {

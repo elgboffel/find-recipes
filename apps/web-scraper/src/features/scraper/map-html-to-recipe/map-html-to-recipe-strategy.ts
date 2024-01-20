@@ -19,7 +19,7 @@ export const mapArlaHtmlToRecipe: MapHtmlToRecipeStrategy = (html, data) => {
 };
 
 export const mapSpisBedreHtmlToRecipe: MapHtmlToRecipeStrategy = (html, data) => {
-  const recipeHtml = html.querySelector('div[itemtype="http://schema.org/Recipe"]');
+  const recipeHtml = html.querySelector("#app");
 
   if (!recipeHtml) return null;
 

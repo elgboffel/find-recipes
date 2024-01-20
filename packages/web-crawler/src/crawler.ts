@@ -29,7 +29,6 @@ export async function crawler({
   url,
   settings,
   ref,
-  skipRules,
   crawlData = new Map(),
 }: CrawlerProps): Promise<Map<string, CrawlData>> {
   const urlObj = createUrlObj(url, settings);
@@ -41,7 +40,7 @@ export async function crawler({
   console.log(crawlData.size);
 
   //TODO: remove
-  // if (crawlData.size > 50) return crawlData;
+  if (crawlData.size > 50) return crawlData;
 
   try {
     const res = await fetcher<string>({ url: urlObj.href, isText: true });
@@ -91,7 +90,7 @@ export async function crawler({
         )
           existingRef.push(urlObj.href);
 
-        crawlData.set(urlified.href, {
+        crawlData?.set(urlified.href, {
           url: urlified.href,
           urlRefs: existingRef,
           hits: exists.hits + 1,
@@ -103,7 +102,6 @@ export async function crawler({
         url: urlified.href,
         settings,
         ref: urlObj.href,
-        skipRules,
         crawlData,
       });
     }
