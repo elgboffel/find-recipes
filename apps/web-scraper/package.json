@@ -1,0 +1,32 @@
+{
+  "name": "@project/web-scraper",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "generate": "ts-node ./src/run/create-data-files.ts",
+    "db.seed": "ts-node ./src/run/seed-database.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@project/database": "*",
+    "@project/common-server": "*",
+    "@project/common": "*",
+    "@project/web-crawler": "*",
+    "dotenv": "16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.8.9",
+    "@project/eslint-config": "*",
+    "@project/ts-config": "*",
+    "tsup": "7.2.0",
+    "typescript": "5.2.2",
+    "ts-node": "10.9.1"
+  }
+}
