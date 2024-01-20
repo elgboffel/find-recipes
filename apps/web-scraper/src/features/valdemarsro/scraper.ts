@@ -1,6 +1,5 @@
-import { Error, fetcher } from "common";
+import { Error, fetcher } from "@project/common";
 import parse from "node-html-parser";
-import { mapValdemarsroHtmlToSeedData } from "./mappers/map-valdemarsro-html-to-seed-data";
 
 export async function scraper(urls: string[]) {
   const failedPages: string[] = [];
@@ -18,9 +17,9 @@ export async function scraper(urls: string[]) {
 
     if (!html.querySelector(".post-recipe")) continue;
 
-    const data = mapValdemarsroHtmlToSeedData(html, url);
+    // const data = mapValdemarsroHtmlToSeedData(html, url);
 
-    recipes.push(data);
+    recipes.push({});
   }
 
   console.warn(`Failed pages ${failedPages}`);
