@@ -1,11 +1,21 @@
-node_modules
+.idea/
+.next/
+.store/
+.turbo/
+dist/
+node_modules/
+target/
+tests_output/
+vendor/
+/out/
+coverage/
 
-.next
-
-dist
-
-.turbo
-
-.idea
-
+*.tsbuildinfo
+.eslintcache
 tsconfig.tsbuildinfo
+
+.DS_Store
+
+# Added by cargo
+
+/target
