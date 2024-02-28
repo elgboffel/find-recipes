@@ -16,6 +16,8 @@ tsconfig.tsbuildinfo
 
 .DS_Store
 
+.wrangler
+
 # Added by cargo
 
 /target
