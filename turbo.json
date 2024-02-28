@@ -15,7 +15,7 @@
       "dependsOn": ["^build"],
       "cache": false
     },
-    "start": {
+    "preview": {
       "dependsOn": ["^build"]
     },
     "clean": {

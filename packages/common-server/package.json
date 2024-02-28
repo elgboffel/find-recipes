@@ -15,8 +15,6 @@
     "lint:fix": "eslint src/ --fix",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {
-  },
   "devDependencies": {
     "@project/eslint-config": "*",
     "@project/ts-config": "*",

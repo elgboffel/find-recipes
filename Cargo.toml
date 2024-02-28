@@ -1,11 +1,10 @@
 [workspace]
 resolver = "2"
 members = [
-    "apps/web_crawler_rust",
     "crates/*"
 ]
 
-default-members = []
+default-members = ["crates/web_crawler"]
 
 # Declare dependencies used across workspace packages requires single version bump.
 # ref: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#inheriting-a-dependency-from-a-workspace
@@ -13,5 +12,7 @@ default-members = []
 too_many_arguments = "allow"
 
 [workspace.dependencies]
-reqwest = { version = "0.11.23", default-features = false }
-anyhow = "1.0.69"
+reqwest = { version = "0.11.23" }
+anyhow = "1.0.79"
+async-recursion = "1.0.5"
+tokio = { version = "1.35.1", features = ["rt", "rt-multi-thread", "macros"] }
