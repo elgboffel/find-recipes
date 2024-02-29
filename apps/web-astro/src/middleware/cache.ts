@@ -15,9 +15,9 @@ export const memoryCache = defineMiddleware(async (context, next) => {
 
   const { KV } = context.locals.runtime.env;
   const buffer = await (await next()).clone().arrayBuffer();
-  await KV.put(context.url.pathname, JSON.stringify({ buffer, expires: Date.now() + 10 * 1000 }));
-  const test = await KV.get(context.url.pathname, { type: "json" });
-  const newRes = test ? new Response((test as any).buffer) : null;
+  await KV.put(context.url.pathname, buffer, { expirationTtl: 10 });
+  const test = await KV.get(context.url.pathname, { type: "arrayBuffer" });
+  const newRes = test ? new Response(test) : null;
 
   if (newRes)
     return newRes.clone();
