@@ -15,12 +15,12 @@ export const memoryCache = defineMiddleware(async (context, next) => {
 
   const { KV } = context.locals.runtime.env;
   const buffer = await (await next()).clone().arrayBuffer();
-  await KV.put(context.url.pathname, buffer, { expirationTtl: 10 });
-  // const test = await KV.get(context.url.pathname, { type: "arrayBuffer" });
-  // const newRes = test ? new Response(test) : null;
-  //
-  // if (newRes)
-  //   return newRes.clone();
+  await KV.put(context.url.pathname, buffer, { expirationTtl: 60 });
+  const test = await KV.get(context.url.pathname, { type: "arrayBuffer" });
+  const newRes = test ? new Response(test) : null;
+
+  if (newRes)
+    return newRes.clone();
 
   // Add a `cache` method to the `req.locals` object
   // that will allow us to set the cache duration for each page.
