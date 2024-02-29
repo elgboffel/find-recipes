@@ -6,7 +6,7 @@ interface ICachedResponse {
   expires: number;
 }
 
-const cache = new Map<Path, ICachedResponse>();
+const store = new Map<Path, ICachedResponse>();
 
 export const memoryCache = defineMiddleware(async (req, next) => {
   let ttl: number | undefined;
@@ -14,6 +14,12 @@ export const memoryCache = defineMiddleware(async (req, next) => {
   if (!req.locals.runtime?.env) return await next();
 
   const { KV } = req.locals.runtime.env;
+  await KV.put(req.url.pathname, await req.request.arrayBuffer() ?? "");
+  const test = await KV.get(req.url.pathname);
+  const newRes = test ? new Response(test) : null;
+
+  if (newRes)
+    return newRes.clone();
 
   // Add a `cache` method to the `req.locals` object
   // that will allow us to set the cache duration for each page.
@@ -21,24 +27,23 @@ export const memoryCache = defineMiddleware(async (req, next) => {
     ttl = seconds;
   };
 
-  const cached = (await KV.get(req.url.pathname, { type: "json" })) as any;
+  const cached = store.get(req.url.pathname);
 
   if (cached && cached.expires > Date.now()) {
     return cached.response.clone();
   } else if (cached) {
-    await cache.delete(req.url.pathname);
+    store.delete(req.url.pathname);
   }
 
   const response = await next();
 
   // If the `cache` method was called, store the response in the cache.
   if (ttl !== undefined) {
-    await KV.put(
-      req.url.pathname,
-      JSON.stringify({
+    store.set(
+      req.url.pathname,{
         response: response.clone(),
         expires: Date.now() + ttl * 1000,
-      })
+      }
     );
   }
 
